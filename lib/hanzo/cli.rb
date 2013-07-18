@@ -1,3 +1,5 @@
+require 'hanzo/modules/deploy'
+
 module Hanzo
 
  class CLI
