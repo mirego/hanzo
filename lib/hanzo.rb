@@ -1,3 +1,5 @@
-module Hanzo
-  VERSION = '0.1.0'
-end
+require 'optparse'
+require "highline/import"
+
+require 'hanzo/cli'
+require 'hanzo/version'
