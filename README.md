@@ -20,7 +20,7 @@ staging: heroku-app-name-staging
 production: heroku-app-name-production
 ```
 
-Install remotes
+### Install remotes
 
 ```bash
 > bundle exec palm install
@@ -31,7 +31,7 @@ Install remotes
        Adding production
 ```
 
-Deploy branch or tag
+### Deploy a branch or a tag
 
 ```bash
 > bundle exec palm deploy qa
