@@ -1,12 +1,7 @@
 #!/usr/bin/env ruby
 
-lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
-$LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'hanzo'
-require 'hanzo/cli'
-require 'hanzo/version'
-require 'hanzo/modules/deploy'
 
-app = Hanzo::CLI.new(ARGV, STDIN)
-app.run
+Hanzo::CLI.new(ARGV, STDIN).run
