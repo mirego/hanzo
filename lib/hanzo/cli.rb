@@ -31,8 +31,8 @@ Available actions:
 
 Options:
 BANNER
-          opts.on('-h', '--help', 'You\'re looking at it.'){ puts opts }
-          opts.on('-v',  '--version',  'Print version'){ puts "Hanzo #{Hanzo::VERSION}" }
+          opts.on('-h', '--help', 'You\'re looking at it.') { puts opts }
+          opts.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
         else
           opts = Hanzo.const_get(@app.capitalize).new(@args)
         end

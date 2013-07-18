@@ -14,8 +14,8 @@ module Hanzo
         opts = OptionParser.new
 
         if @env.nil?
-          opts.banner = "Usage: hanzo deploy ENVIRONMENT"
-          opts.on('-h', '--help', "This help") { puts opts }
+          opts.banner = 'Usage: hanzo deploy ENVIRONMENT'
+          opts.on('-h', '--help', 'This help') { puts opts }
         else
           deploy
         end
