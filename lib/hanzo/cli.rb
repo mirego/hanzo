@@ -2,27 +2,20 @@ module Hanzo
 
  class CLI
 
-    attr_reader :options
-
     def initialize(arguments, stdin)
       @arguments = arguments
-      @stdin = stdin
 
       app = (@arguments[0] =~ /-/) ? nil : @arguments[0]
-      @opts = init_options(app)
+      @opts = init_cli(app)
     end
 
     def run
-      begin
-        @opts.parse!(@arguments)
-      rescue Exception => e
-        puts e
-      end
+      @opts.parse!(@arguments)
     end
 
     protected
 
-      def init_options(app=nil)
+      def init_cli(app=nil)
         opts = OptionParser.new
 
         # Extend CLI with modules
