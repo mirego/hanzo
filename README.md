@@ -36,7 +36,7 @@ production: heroku-app-name-production
 ```bash
 > bundle exec hanzo deploy qa
 
------> Branch to deploy [1.2]: 1.2
+-----> Branch to deploy: |HEAD|
 ```
 
 ## License
