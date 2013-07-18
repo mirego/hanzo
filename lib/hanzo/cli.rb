@@ -4,15 +4,15 @@ module Hanzo
 
  class CLI
 
-    def initialize(arguments, stdin)
-      @arguments = arguments
+    def initialize(args)
+      @args = args
 
-      app = (@arguments[0] =~ /-/) ? nil : @arguments[0]
+      app = (@args[0] =~ /-/) ? nil : @args[0]
       @opts = init_cli(app)
     end
 
     def run
-      @opts.parse!(@arguments)
+      @opts.parse!(@args)
     end
 
     protected
@@ -34,7 +34,7 @@ BANNER
           opts.on('-h', '--help', 'You\'re looking at it.'){ puts opts }
           opts.on('-v',  '--version',  'Print version'){ puts "Hanzo #{Hanzo::VERSION}" }
         else
-          opts = Hanzo.const_get(app.capitalize).init_cli(@arguments)
+          opts = Hanzo.const_get(app.capitalize).new(@args)
         end
 
         opts

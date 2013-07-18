@@ -4,4 +4,4 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'hanzo'
 
-Hanzo::CLI.new(ARGV, STDIN).run
+Hanzo::CLI.new(ARGV).run

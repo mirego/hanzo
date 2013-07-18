@@ -1,23 +1,32 @@
 module Hanzo
-  module Deploy
+  class Deploy
 
-    def self.init_cli(args)
-      opts = OptionParser.new
+    def initialize(args)
+      @args = args
 
-      opts.banner = "Usage: hanzo deploy [options]"
-      opts.on('-h', '--help', "This help") { puts opts }
-
-      self.deploy(opts, args)
-
-      opts
+      @env = (@args[0] =~ /-/) ? nil : @args[0]
+      @opts = init_cli
     end
 
-    private
+    protected
 
-      def self.deploy(opts, args)
-        branch = ask "-----> Branch to deploy in #{args[0]} [HEAD]: "
+      def init_cli
+        opts = OptionParser.new
 
-        `git push -f #{args[1]} #{branch}:master`
+        if @env.nil?
+          opts.banner = "Usage: hanzo deploy ENVIRONMENT"
+          opts.on('-h', '--help', "This help") { puts opts }
+        else
+          deploy
+        end
+
+        opts
+      end
+
+      def deploy
+        branch = ask "-----> Branch to deploy in #{@env} [HEAD]: "
+
+        `git push -f #{@env} #{branch}:master`
       end
 
   end
