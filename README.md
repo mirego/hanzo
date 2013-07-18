@@ -1,18 +1,18 @@
-# Palm
+# Hanzo
 
-Palm is a Ruby library that allows a team to easily share environment endpoints for Heroku apps.
+Hanzo is a Ruby library that allows a team to easily share environment endpoints for Heroku apps.
 
 ## Installation
 
 Add this line to your application’s Gemfile:
 
 ```ruby
-gem 'palm'
+gem 'hanzo'
 ```
 
 ## Usage
 
-Create a `.palm` file at the root of your app.
+Create an `.heroku-remotes` file at the root of your app.
 
 ```yaml
 qa: heroku-app-name-qa
@@ -23,7 +23,7 @@ production: heroku-app-name-production
 ### Install remotes
 
 ```bash
-> bundle exec palm install
+> bundle exec hanzo install
 
 -----> Creating git remotes
        Adding qa
@@ -34,14 +34,14 @@ production: heroku-app-name-production
 ### Deploy a branch or a tag
 
 ```bash
-> bundle exec palm deploy qa
+> bundle exec hanzo deploy qa
 
 -----> Branch to deploy [1.2]: 1.2
 ```
 
 ## License
 
-`Palm` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/palm/blob/master/LICENSE.md) file.
+`Hanzo` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/hanzo/blob/master/LICENSE.md) file.
 
 ## About Mirego
 
