@@ -1,6 +1,6 @@
 # Palm
 
-Palm is a Ruby library that allows a team to easily share environment endpoints for Heroku deployment.
+Palm is a Ruby library that allows a team to easily share environment endpoints for Heroku apps.
 
 ## Installation
 
