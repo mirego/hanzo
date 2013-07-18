@@ -24,8 +24,7 @@ module Hanzo
       end
 
       def deploy
-        branch = ask "-----> Branch to deploy in #{@env} [HEAD]: "
-        branch = 'HEAD' if branch.empty?
+        branch = ask("-----> Branch to deploy in #{@env} [HEAD]:") { |q| q.default = "HEAD" }
 
         `git push -f #{@env} #{branch}:master`
       end
