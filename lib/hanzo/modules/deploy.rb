@@ -20,6 +20,7 @@ module Hanzo
           opts.on('-h', '--help', 'This help') { puts opts }
         else
           deploy
+          opts = nil
         end
 
         @options = opts

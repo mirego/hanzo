@@ -13,7 +13,8 @@ module Hanzo
     end
 
     def run
-      @opts.parse!(@args)
+      @opts.parse!(@args) if @opts.respond_to? :parse!
+      puts @opts unless @opts.nil?
     end
 
     protected
