@@ -1,29 +1,21 @@
 module Hanzo
-  class Deploy
-
-    attr_accessor :options
+  class Deploy < Base
 
     def initialize(args)
-      @args = args
-      @env = (@args[1] =~ /-/) ? nil : @args[1]
-
-      init_cli
+      @env = (args[1] =~ /-/) ? nil : args[1]
+      super
     end
 
     protected
 
       def init_cli
-        opts = OptionParser.new
+        init_help and return if @env.nil?
 
-        if @env.nil?
-          opts.banner = "Usage: hanzo deploy ENVIRONMENT\n\n"
-          opts.on('-h', '--help', 'This help') { puts opts }
-        else
-          deploy
-          opts = nil
-        end
+        deploy
+      end
 
-        @options = opts
+      def init_help
+        @options.banner = "Usage: hanzo deploy ENVIRONMENT"
       end
 
       def deploy

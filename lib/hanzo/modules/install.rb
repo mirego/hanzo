@@ -1,37 +1,30 @@
-require 'hanzo/modules/install/remotes'
+require 'hanzo/modules/installers/remotes'
 
 module Hanzo
-  class Install
+  class Install < Base
 
-    include Hanzo::Install::Remotes
-
-    attr_accessor :options
+    include Hanzo::Installers::Remotes
 
     def initialize(args)
-      @args = args
-      @type = (@args[1] =~ /-/) ? nil : @args[1]
-
-      init_cli
+      @type = (args[1] =~ /-/) ? nil : args[1]
+      super
     end
 
     protected
 
       def init_cli
-        opts = OptionParser.new
+        init_help and return if @type.nil?
 
-        if @type.nil?
-          opts.banner = <<-BANNER
+        send "install_#{@type}"
+      end
+
+      def init_help
+        @options.banner = <<-BANNER
 Usage: hanzo install TYPE
 
 Available install type:
   remotes — Add git remotes to current repository
 BANNER
-        else
-          send("install_#{@type}")
-          opts = nil
-        end
-
-        @options = opts
       end
 
   end
