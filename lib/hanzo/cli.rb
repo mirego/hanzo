@@ -2,44 +2,39 @@ require 'hanzo/modules/deploy'
 require 'hanzo/modules/install'
 
 module Hanzo
-
- class CLI
+ class CLI < Base
 
     def initialize(args)
-      @args = args
-
-      @app = (@args[0] =~ /-/) ? nil : @args[0]
-      @opts = init_cli
+      @app = (args[0] =~ /-/) ? nil : args[0]
+      super
     end
 
     def run
-      @opts.parse!(@args) if @opts.respond_to? :parse!
-      puts @opts unless @opts.nil?
+      @options.parse!(@args) if @opts.respond_to? :parse!
+      puts @options
     end
 
-    protected
+  protected
 
-      def init_cli
-        if @app.nil?
-          opts = OptionParser.new
-          opts.banner = <<-BANNER
+    def init_cli
+      init_help and return if @app.nil?
+
+      @options = Hanzo.const_get(@app.capitalize).new(@args).options
+    end
+
+    def init_help
+      @options.banner = <<-BANNER
 Usage: hanzo action [options]
 
 Available actions:
-   deploy — Deploy a branch or a tag
-  install — Install Hanzo configuration
+ deploy — Deploy a branch or a tag
+install — Install Hanzo configuration
 
 Options:
 BANNER
-          opts.on('-h', '--help', 'You\'re looking at it.') { puts opts }
-          opts.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
-        else
-          opts = Hanzo.const_get(@app.capitalize).new(@args).options
-        end
-
-        opts
-      end
+      @options.on('-h', '--help', 'You\'re looking at it.') { puts @options }
+      @options.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
+    end
 
   end
-
 end
