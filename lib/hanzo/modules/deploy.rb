@@ -1,12 +1,11 @@
 module Hanzo
   class Deploy < Base
 
-    def initialize(args)
-      @env = (args[1] =~ /-/) ? nil : args[1]
-      super
-    end
-
   protected
+
+    def initialize_variables
+      @env = extract_argument(1)
+    end
 
     def initialize_cli
       initialize_help and return if @env.nil?

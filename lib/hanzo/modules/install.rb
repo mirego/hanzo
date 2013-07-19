@@ -5,12 +5,11 @@ module Hanzo
 
     include Hanzo::Installers::Remotes
 
-    def initialize(args)
-      @type = (args[1] =~ /-/) ? nil : args[1]
-      super
-    end
-
   protected
+
+    def initialize_variables
+      @type = extract_argument(1)
+    end
 
     def initialize_cli
       initialize_help and return if @type.nil?

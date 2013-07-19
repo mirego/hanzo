@@ -7,7 +7,12 @@ module Hanzo
       @args = args
       @options = OptionParser.new
 
+      initialize_variables
       initialize_cli
+    end
+
+    def extract_argument(index)
+      (@args[index] =~ /-/) ? nil : @args[index]
     end
 
   end
