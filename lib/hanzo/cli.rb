@@ -11,7 +11,7 @@ module Hanzo
 
     def run
       @options.parse!(@args) if @opts.respond_to? :parse!
-      puts @options
+      puts @options unless @options.to_s == "Usage: hanzo [options]\n"
     end
 
   protected
