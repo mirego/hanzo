@@ -31,6 +31,23 @@ production: heroku-app-name-production
        Adding production
 ```
 
+### Add a new environment
+
+This will prompt an interactive form based on the `.env.default` file
+located at the root of your project.
+
+```bash
+> bundle exec hanzo add qa
+
+-----> Creating new environment
+       Heroku app name: app_name
+-----> Adding git remote
+-----> Setting up environment
+       AWS_S3_ACCESS_ID:
+       AWS_S3_SECRET_KEY:
+       ...
+```
+
 ### Deploy a branch or a tag
 
 ```bash
