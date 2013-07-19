@@ -1,5 +1,6 @@
 require 'hanzo/modules/deploy'
 require 'hanzo/modules/install'
+require 'hanzo/modules/add'
 
 module Hanzo
 

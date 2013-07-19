@@ -1,9 +1,9 @@
-require 'hanzo/modules/install/remotes'
+require 'hanzo/modules/installers/remotes'
 
 module Hanzo
   class Install
 
-    include Hanzo::Install::Remotes
+    include Hanzo::Installers::Remotes
 
     attr_accessor :options
 
