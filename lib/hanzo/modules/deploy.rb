@@ -1,36 +1,27 @@
 module Hanzo
-  class Deploy
+  class Deploy < Base
 
-    attr_accessor :options
+  protected
 
-    def initialize(args)
-      @args = args
-      @env = (@args[1] =~ /-/) ? nil : @args[1]
-
-      init_cli
+    def initialize_variables
+      @env = extract_argument(1)
     end
 
-    protected
+    def initialize_cli
+      initialize_help and return if @env.nil?
 
-      def init_cli
-        opts = OptionParser.new
+      deploy
+    end
 
-        if @env.nil?
-          opts.banner = "Usage: hanzo deploy ENVIRONMENT\n\n"
-          opts.on('-h', '--help', 'This help') { puts opts }
-        else
-          deploy
-          opts = nil
-        end
+    def initialize_help
+      @options.banner = "Usage: hanzo deploy ENVIRONMENT"
+    end
 
-        @options = opts
-      end
+    def deploy
+      branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
 
-      def deploy
-        branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
-
-        `git push -f #{@env} #{branch}:master`
-      end
+      `git push -f #{@env} #{branch}:master`
+    end
 
   end
 end
