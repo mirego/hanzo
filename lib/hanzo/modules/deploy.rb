@@ -8,13 +8,13 @@ module Hanzo
 
   protected
 
-    def init_cli
-      init_help and return if @env.nil?
+    def initialize_cli
+      initialize_help and return if @env.nil?
 
       deploy
     end
 
-    def init_help
+    def initialize_help
       @options.banner = "Usage: hanzo deploy ENVIRONMENT"
     end
 

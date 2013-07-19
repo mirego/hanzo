@@ -16,13 +16,13 @@ module Hanzo
 
   protected
 
-    def init_cli
-      init_help and return if @app.nil?
+    def initialize_cli
+      initialize_help and return if @app.nil?
 
       @options = Hanzo.const_get(@app.capitalize).new(@args).options
     end
 
-    def init_help
+    def initialize_help
       @options.banner = <<-BANNER
 Usage: hanzo action [options]
 

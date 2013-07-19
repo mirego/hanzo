@@ -7,7 +7,7 @@ module Hanzo
       @args = args
       @options = OptionParser.new
 
-      init_cli
+      initialize_cli
     end
 
   end

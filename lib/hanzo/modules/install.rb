@@ -12,13 +12,13 @@ module Hanzo
 
   protected
 
-    def init_cli
-      init_help and return if @type.nil?
+    def initialize_cli
+      initialize_help and return if @type.nil?
 
       send "install_#{@type}"
     end
 
-    def init_help
+    def initialize_help
       @options.banner = <<-BANNER
 Usage: hanzo install TYPE
 
