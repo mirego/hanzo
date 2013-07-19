@@ -6,23 +6,23 @@ module Hanzo
       super
     end
 
-    protected
+  protected
 
-      def init_cli
-        init_help and return if @env.nil?
+    def init_cli
+      init_help and return if @env.nil?
 
-        deploy
-      end
+      deploy
+    end
 
-      def init_help
-        @options.banner = "Usage: hanzo deploy ENVIRONMENT"
-      end
+    def init_help
+      @options.banner = "Usage: hanzo deploy ENVIRONMENT"
+    end
 
-      def deploy
-        branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
+    def deploy
+      branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
 
-        `git push -f #{@env} #{branch}:master`
-      end
+      `git push -f #{@env} #{branch}:master`
+    end
 
   end
 end

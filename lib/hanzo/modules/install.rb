@@ -10,22 +10,22 @@ module Hanzo
       super
     end
 
-    protected
+  protected
 
-      def init_cli
-        init_help and return if @type.nil?
+    def init_cli
+      init_help and return if @type.nil?
 
-        send "install_#{@type}"
-      end
+      send "install_#{@type}"
+    end
 
-      def init_help
-        @options.banner = <<-BANNER
+    def init_help
+      @options.banner = <<-BANNER
 Usage: hanzo install TYPE
 
 Available install type:
   remotes — Add git remotes to current repository
 BANNER
-      end
+    end
 
   end
 end
