@@ -9,7 +9,6 @@ module Hanzo
 
     def initialize_cli
       initialize_help and return if @env.nil?
-
       deploy
       run_migrations
     end
@@ -30,6 +29,5 @@ module Hanzo
         `bundle exec heroku run rake db:migrate --remote #{@env}` if migration
       end
     end
-
   end
 end

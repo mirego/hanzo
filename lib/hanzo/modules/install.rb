@@ -3,7 +3,6 @@ require 'hanzo/modules/installers/labs'
 
 module Hanzo
   class Install < Base
-
     include Hanzo::Installers::Remotes
     include Hanzo::Installers::Labs
 
@@ -15,7 +14,6 @@ module Hanzo
 
     def initialize_cli
       initialize_help and return if @type.nil?
-
       send "install_#{@type}"
     end
 
@@ -27,6 +25,5 @@ Available install type:
   remotes — Add git remotes to current repository
 BANNER
     end
-
   end
 end
