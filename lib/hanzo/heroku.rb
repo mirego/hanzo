@@ -4,15 +4,13 @@ module Hanzo
     class << self
 
       def available_labs
-        labs = []
-
-        `bundle exec heroku labs`.each_line do |line|
-          next unless line = /^\[\s\]\s+(?<name>\w+)\s+(?<description>.+)$/.match(line)
-
-          labs << [line[:name], line[:description]]
+        `bundle exec heroku labs`.each_line.to_a.inject([]) do |memo, line|
+          if line = /^\[\s\]\s+(?<name>\w+)\s+(?<description>.+)$/.match(line)
+            memo << [line[:name], line[:description]]
+          else
+            memo
+          end
         end
-
-        labs
       end
 
     end
