@@ -21,6 +21,9 @@ module Hanzo
       branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
 
       `git push -f #{@env} #{branch}:master`
+
+      migration = agree("-----> Run migrations? ")
+      `bundle exec heroku run rake db:migrate --remote #{@env}` if migration
     end
 
   end
