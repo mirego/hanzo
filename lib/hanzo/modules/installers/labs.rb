@@ -5,8 +5,8 @@ module Hanzo
       def install_labs
         puts '-----> Activating Heroku Labs'
 
-        ['preboot', 'user-env-compile'].each do |lab|
-          if agree("       Add #{lab}? ")
+        Hanzo::Heroku.available_labs.each do |name, description|
+          if agree("       Add #{name}? ")
             Hanzo::Installers::Remotes.environments.each_pair do |env, app|
               Hanzo::Installers::Labs.enable(env, lab)
             end
