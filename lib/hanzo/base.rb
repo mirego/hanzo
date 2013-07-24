@@ -1,6 +1,5 @@
 module Hanzo
   class Base
-
     attr_accessor :options
 
     def initialize(args)
@@ -14,6 +13,5 @@ module Hanzo
     def extract_argument(index)
       (@args[index] =~ /-/) ? nil : @args[index]
     end
-
   end
 end

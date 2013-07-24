@@ -3,7 +3,6 @@ require 'hanzo/modules/install'
 
 module Hanzo
  class CLI < Base
-
     def run
       @options.parse!(@args) if @opts.respond_to? :parse!
       puts @options unless @options.to_s == "Usage: hanzo [options]\n"
@@ -34,6 +33,5 @@ BANNER
       @options.on('-h', '--help', 'You\'re looking at it.') { puts @options }
       @options.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
     end
-
   end
 end
