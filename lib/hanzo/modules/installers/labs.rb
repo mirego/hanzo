@@ -1,7 +1,6 @@
 module Hanzo
   module Installers
     module Labs
-
       def install_labs
         puts '-----> Activating Heroku Labs'
 
@@ -18,7 +17,6 @@ module Hanzo
         `bundle exec heroku labs:enable #{lab} --remote #{env}`
         puts "       - Enabled for #{env}"
       end
-
     end
   end
 end

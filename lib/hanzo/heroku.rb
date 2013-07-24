@@ -1,6 +1,5 @@
 module Hanzo
   module Heroku
-
     class << self
 
       def available_labs
@@ -14,6 +13,5 @@ module Hanzo
       end
 
     end
-
   end
 end
