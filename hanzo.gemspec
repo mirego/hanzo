@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.version       = Hanzo::VERSION
   spec.authors       = ['Samuel Garneau']
   spec.email         = ['sgarneau@mirego.com']
-  spec.description   = 'Hanzo easily handle multiple Heroku environments for an app'
-  spec.summary       = 'Hanzo easily handle multiple Heroku environments for an app'
-  spec.homepage      = 'https://github.com/mirego/palm'
+  spec.description   = 'Hanzo is a tool to handle deployments in multiple environments on Heroku.'
+  spec.summary       = 'Hanzo is a tool to handle deployments in multiple environments on Heroku.'
+  spec.homepage      = 'https://github.com/mirego/hanzo'
   spec.license       = 'BSD 3-Clause'
 
   spec.files         = `git ls-files`.split($/)
