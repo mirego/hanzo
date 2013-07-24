@@ -1,7 +1,6 @@
 module Hanzo
   module Installers
     module Remotes
-
       def install_remotes
         puts '-----> Creating git remotes'
 
@@ -23,7 +22,6 @@ module Hanzo
         puts '       For more information, please read https://github.com/mirego/hanzo'
         exit
       end
-
     end
   end
 end

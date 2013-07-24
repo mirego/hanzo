@@ -30,6 +30,5 @@ module Hanzo
         `bundle exec heroku run rake db:migrate --remote #{@env}` if migration
       end
     end
-
   end
 end

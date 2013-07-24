@@ -3,7 +3,6 @@ require 'hanzo/modules/installers/labs'
 
 module Hanzo
   class Install < Base
-
     include Hanzo::Installers::Remotes
     include Hanzo::Installers::Labs
 
@@ -27,6 +26,5 @@ Available install type:
   remotes — Add git remotes to current repository
 BANNER
     end
-
   end
 end
