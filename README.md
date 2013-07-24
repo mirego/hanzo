@@ -31,6 +31,25 @@ production: heroku-app-name-production
        Adding production
 ```
 
+### Install labs
+
+Once all your environments are activated, you might want to enable some
+Heroku labs feature for all your environments.
+
+```bash
+> be hanzo install labs
+
+-----> Activating Heroku Labs
+       Add preboot? yes
+       - Enabled for qa
+       - Enabled for staging
+       - Enabled for production
+       Add user-env-compile? yes
+       - Enabled for qa
+       - Enabled for staging
+       - Enabled for production
+```
+
 ### Deploy a branch or a tag
 
 ```bash

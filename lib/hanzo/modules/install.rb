@@ -1,9 +1,11 @@
 require 'hanzo/modules/installers/remotes'
+require 'hanzo/modules/installers/labs'
 
 module Hanzo
   class Install < Base
 
     include Hanzo::Installers::Remotes
+    include Hanzo::Installers::Labs
 
   protected
 
