@@ -11,6 +11,7 @@ module Hanzo
       initialize_help and return if @env.nil?
 
       deploy
+      run_migrations
     end
 
     def initialize_help
@@ -21,9 +22,13 @@ module Hanzo
       branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
 
       `git push -f #{@env} #{branch}:master`
+    end
 
-      migration = agree("-----> Run migrations? ")
-      `bundle exec heroku run rake db:migrate --remote #{@env}` if migration
+    def run_migrations
+      if Dir.exists?('db/migrate')
+        migration = agree("-----> Run migrations? ")
+        `bundle exec heroku run rake db:migrate --remote #{@env}` if migration
+      end
     end
 
   end
