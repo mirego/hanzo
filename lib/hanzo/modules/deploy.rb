@@ -9,6 +9,7 @@ module Hanzo
 
     def initialize_cli
       initialize_help and return if @env.nil?
+
       deploy
       run_migrations
     end

@@ -14,6 +14,7 @@ module Hanzo
 
     def initialize_cli
       initialize_help and return if @type.nil?
+
       send "install_#{@type}"
     end
 
