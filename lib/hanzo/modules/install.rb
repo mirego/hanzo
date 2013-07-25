@@ -23,7 +23,7 @@ module Hanzo
 Usage: hanzo install TYPE
 
 Available install type:
-  remotes — Add git remotes to current repository
+  remotes - Add git remotes to current repository
 BANNER
     end
   end
