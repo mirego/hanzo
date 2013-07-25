@@ -25,8 +25,8 @@ module Hanzo
 Usage: hanzo action [options]
 
 Available actions:
-   deploy — Deploy a branch or a tag
-  install — Install Hanzo configuration
+   deploy - Deploy a branch or a tag
+  install - Install Hanzo configuration
 
 Options:
 BANNER
