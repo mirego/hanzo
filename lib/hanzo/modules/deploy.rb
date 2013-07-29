@@ -27,7 +27,7 @@ module Hanzo
     def run_migrations
       if Dir.exists?('db/migrate')
         migration = agree("-----> Run migrations? ")
-        `bundle exec heroku run rake db:migrate --remote #{@env}` if migration
+        `heroku run rake db:migrate --remote #{@env}` if migration
       end
     end
   end

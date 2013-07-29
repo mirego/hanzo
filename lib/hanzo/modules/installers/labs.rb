@@ -14,7 +14,7 @@ module Hanzo
       end
 
       def self.enable(env, lab)
-        `bundle exec heroku labs:enable #{lab} --remote #{env}`
+        `heroku labs:enable #{lab} --remote #{env}`
         puts "       - Enabled for #{env}"
       end
     end
