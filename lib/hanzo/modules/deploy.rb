@@ -19,15 +19,15 @@ module Hanzo
     end
 
     def deploy
-      branch = ask("-----> Branch to deploy in #{@env}: ") { |q| q.default = "HEAD" }
+      branch = Hanzo.ask("Branch to deploy in #{@env}:") { |q| q.default = "HEAD" }
 
-      `git push -f #{@env} #{branch}:master`
+      Hanzo.run "git push -f #{@env} #{branch}:master"
     end
 
     def run_migrations
       if Dir.exists?('db/migrate')
-        migration = agree("-----> Run migrations? ")
-        `heroku run rake db:migrate --remote #{@env}` if migration
+        migration = Hanzo.agree('Run migrations?')
+        Hanzo.run "heroku run rake db:migrate --remote #{@env}" if migration
       end
     end
   end
