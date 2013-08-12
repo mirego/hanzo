@@ -1,5 +1,8 @@
 # Hanzo
 
+[![Gem Version](https://badge.fury.io/rb/hanzo.png)](https://rubygems.org/gems/hanzo)
+[![Code Climate](https://codeclimate.com/github/mirego/hanzo.png)](https://codeclimate.com/github/mirego/hanzo)
+
 Hanzo is a Ruby library that allows a team to easily share environment endpoints for Heroku apps.
 
 ## Installation
