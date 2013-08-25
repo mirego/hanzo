@@ -5,6 +5,10 @@ module Hanzo
 
     def initialize_variables
       @env = extract_argument(1)
+
+      if @env.nil? and Hanzo::Installers::Remotes.environments.keys.length == 1
+        @env = Hanzo::Installers::Remotes.environments.keys.first
+      end
     end
 
     def initialize_cli
