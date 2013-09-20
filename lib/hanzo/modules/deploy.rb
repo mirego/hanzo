@@ -19,7 +19,15 @@ module Hanzo
     end
 
     def initialize_help
-      @options.banner = "Usage: hanzo deploy ENVIRONMENT"
+      @options.banner = <<-BANNER
+Usage: hanzo deploy ENVIRONMENT
+
+Available environments
+BANNER
+
+      Hanzo::Installers::Remotes.environments.each do |env|
+        @options.banner << "  - #{env.first}\n"
+      end
     end
 
     def deploy
