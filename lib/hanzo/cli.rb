@@ -17,7 +17,11 @@ module Hanzo
     def initialize_cli
       initialize_help and return if @app.nil?
 
-      @options = Hanzo.const_get(@app.capitalize).new(@args).options
+      begin
+        @options = Hanzo.const_get(@app.capitalize).new(@args).options
+      rescue NameError
+        initialize_help
+      end
     end
 
     def initialize_help
