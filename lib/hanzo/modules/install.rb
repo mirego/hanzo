@@ -15,7 +15,13 @@ module Hanzo
     def initialize_cli
       initialize_help and return if @type.nil?
 
-      send "install_#{@type}"
+      method = "install_#{@type}"
+
+      if self.respond_to?(method)
+        send(method)
+      else
+        initialize_help
+      end
     end
 
     def initialize_help
