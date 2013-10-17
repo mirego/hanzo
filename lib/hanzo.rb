@@ -10,7 +10,9 @@ require 'hanzo/version'
 module Hanzo
   def self.run(command)
     print(command, :green)
-    Bundler.with_clean_env { `#{command}` }
+    output = nil
+    ::Bundler.with_clean_env { output = `#{command}` }
+    output
   end
 
   def self.print(text, *colors)
