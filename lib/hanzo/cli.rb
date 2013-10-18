@@ -26,16 +26,16 @@ module Hanzo
     end
 
     def initialize_help
-      @options.banner = <<-BANNER
-Usage: hanzo action [options]
+      @options.banner = <<-BANNER.unindent
+        Usage: hanzo action [options]
 
-Available actions:
-   deploy - Deploy a branch or a tag
-  install - Install Hanzo configuration
-   config - Manage Heroku configuration variables
+        Available actions:
+           deploy - Deploy a branch or a tag
+          install - Install Hanzo configuration
+           config - Manage Heroku configuration variables
 
-Options:
-BANNER
+        Options:
+      BANNER
       @options.on('-h', '--help', 'You\'re looking at it.') { puts @options }
       @options.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
     end

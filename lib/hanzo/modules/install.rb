@@ -25,12 +25,12 @@ module Hanzo
     end
 
     def initialize_help
-      @options.banner = <<-BANNER
-Usage: hanzo install TYPE
+      @options.banner = <<-BANNER.unindent
+        Usage: hanzo install TYPE
 
-Available install type:
-  remotes - Add git remotes to current repository
-BANNER
+        Available install type:
+          remotes - Add git remotes to current repository
+      BANNER
     end
   end
 end
