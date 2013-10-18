@@ -1,5 +1,6 @@
 require 'hanzo/modules/deploy'
 require 'hanzo/modules/install'
+require 'hanzo/modules/config'
 
 module Hanzo
  class CLI < Base
@@ -31,6 +32,7 @@ Usage: hanzo action [options]
 Available actions:
    deploy - Deploy a branch or a tag
   install - Install Hanzo configuration
+   config - Manage Heroku configuration variables
 
 Options:
 BANNER
