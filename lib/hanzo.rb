@@ -33,3 +33,9 @@ module Hanzo
     HighLine.ask "-----> #{question} ", &blk
   end
 end
+
+class String
+  def unindent
+    gsub /^#{scan(/^\s*/).min_by{|l|l.length}}/, ''
+  end
+end
