@@ -21,12 +21,12 @@ module Hanzo
     end
 
     def initialize_help
-      @options.banner = <<-BANNER
-Usage: hanzo config TYPE
+      @options.banner = <<-BANNER.unindent
+        Usage: hanzo config TYPE
 
-Available install type:
-  compare - Compare the environment variables set across the remotes
-BANNER
+        Available install type:
+          compare - Compare the environment variables set across the remotes
+      BANNER
     end
 
   private
