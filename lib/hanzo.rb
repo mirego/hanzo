@@ -15,8 +15,9 @@ module Hanzo
     output
   end
 
-  def self.print(text, *colors)
+  def self.print(text = '', *colors)
     colors = colors.map { |c| HighLine.const_get(c.to_s.upcase) }
+    text = text.join("\n       ") if text.is_a?(Array)
     HighLine.say HighLine.color("       #{text}", *colors)
   end
 
