@@ -39,7 +39,11 @@ module Hanzo
     def run_migrations
       if Dir.exists?('db/migrate')
         migration = Hanzo.agree('Run migrations?')
-        Hanzo.run "heroku run rake db:migrate --remote #{@env}" if migration
+
+        if migration
+          Hanzo.run "heroku run rake db:migrate --remote #{@env}"
+          Hanzo.run "heroku ps:restart --remote #{@env}"
+        end
       end
     end
   end
