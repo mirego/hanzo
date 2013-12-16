@@ -7,6 +7,7 @@
   <br /><br />
   <a href="https://rubygems.org/gems/hanzo"><img src="https://badge.fury.io/rb/hanzo.png" /></a>
   <a href="https://codeclimate.com/github/mirego/hanzo"><img src="https://codeclimate.com/github/mirego/hanzo.png" /></a>
+  <a href="https://travis-ci.org/mirego/hanzo"><img src="https://travis-ci.org/mirego/hanzo.png?branch=master" /></a>
 </p>
 
 ---
