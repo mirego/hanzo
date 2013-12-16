@@ -64,4 +64,3 @@ describe Hanzo::CLI do
     end
   end
 end
-
