@@ -2,7 +2,7 @@ module Hanzo
   class Config < Base
 
     def compare
-      Hanzo.title("Fetching environment variables")
+      Hanzo.title "Fetching environment variables"
       fetch_variables
 
       Hanzo.title "Comparing environment variables"

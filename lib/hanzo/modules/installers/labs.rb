@@ -7,7 +7,7 @@ module Hanzo
         Hanzo::Heroku.available_labs.each do |name, description|
           if Hanzo.agree("Add #{name}?")
             Hanzo::Installers::Remotes.environments.each_pair do |env, app|
-              Hanzo::Installers::Labs.enable(env, lab)
+              Hanzo::Installers::Labs.enable(env, name)
             end
           end
         end
