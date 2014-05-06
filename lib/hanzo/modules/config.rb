@@ -34,7 +34,7 @@ module Hanzo
     def fetch_variables
       @variables = Hanzo::Installers::Remotes.environments.keys.inject({}) do |memo, env|
         # Fetch the variables over at Heroku
-        config = Hanzo.run("heroku config -r #{env}").split("\n")
+        config = Hanzo.run("heroku config -r #{env}", true).split("\n")
 
         # Reject the first line (Heroku header)
         config = config.reject { |line| line =~ /^=/ }

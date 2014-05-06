@@ -8,9 +8,19 @@ require 'hanzo/heroku'
 require 'hanzo/version'
 
 module Hanzo
-  def self.run(command)
+  def self.run(command, fetch_output = false)
     print(command, :green)
-    ::Bundler.with_clean_env { system(command) }
+    output = true
+
+    ::Bundler.with_clean_env do
+      if fetch_output
+        output = `#{command}`
+      else
+        system(command)
+      end
+    end
+
+    output
   end
 
   def self.print(text = '', *colors)
