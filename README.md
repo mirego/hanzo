@@ -22,7 +22,8 @@ gem 'hanzo'
 
 ## Usage
 
-Create an `.heroku-remotes` file at the root of your app.
+Create an `.heroku-remotes` file at the root of your app that will contain the name of the
+environment as the key and the Heroku app name as the value.
 
 ```yaml
 qa: heroku-app-name-qa
@@ -32,13 +33,22 @@ production: heroku-app-name-production
 
 ### Install remotes
 
+Whenever you add a new environment to your `.heroku-remotes` file, you'll have to install those
+remotes locally by running `hanzo install`.
+
 ```bash
 > hanzo install
 
 -----> Creating git remotes
        Adding qa
+        git remote rm qa 2>&1 > /dev/null
+        git remote add qa git@heroku.com:heroku-app-name-qa.git
        Adding staging
+        git remote rm staging 2>&1 > /dev/null
+        git remote add staging git@heroku.com:heroku-app-name-staging.git
        Adding production
+        git remote rm production 2>&1 > /dev/null
+        git remote add production git@heroku.com:heroku-app-name-production.git
 ```
 
 ### Deploy a branch or a tag
@@ -70,7 +80,7 @@ Heroku labs feature for all your environments.
 
 ## License
 
-`Hanzo` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/hanzo/blob/master/LICENSE.md) file.
+`Hanzo` is © 2014 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/hanzo/blob/master/LICENSE.md) file.
 
 ## About Mirego
 
