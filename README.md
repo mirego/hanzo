@@ -33,7 +33,7 @@ production: heroku-app-name-production
 ### Install remotes
 
 ```bash
-> bundle exec hanzo install
+> hanzo install
 
 -----> Creating git remotes
        Adding qa
@@ -44,7 +44,7 @@ production: heroku-app-name-production
 ### Deploy a branch or a tag
 
 ```bash
-> bundle exec hanzo deploy qa
+> hanzo deploy qa
 
 -----> Branch to deploy: |HEAD|
 ```
