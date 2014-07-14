@@ -12,7 +12,7 @@ module Hanzo
     print(command, :green)
     output = true
 
-    ::Bundler.with_clean_env do
+    _run do
       if fetch_output
         output = `#{command}`
       else
@@ -21,6 +21,14 @@ module Hanzo
     end
 
     output
+  end
+
+  def self._run(&blk)
+    if defined?(Bundle)
+      ::Bundle.with_clean_env(&blk)
+    else
+      blk.call
+    end
   end
 
   def self.print(text = '', *colors)
