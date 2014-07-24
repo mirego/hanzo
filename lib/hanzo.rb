@@ -24,8 +24,8 @@ module Hanzo
   end
 
   def self._run(&blk)
-    if defined?(Bundle)
-      ::Bundle.with_clean_env(&blk)
+    if defined?(Bundler)
+      ::Bundler.with_clean_env(&blk)
     else
       blk.call
     end
