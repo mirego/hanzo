@@ -5,7 +5,7 @@ describe Hanzo::CLI do
     let(:config!) { Hanzo::CLI.new(['config', action]) }
     let(:heroku_remotes) { { 'production' => 'heroku-app-production', 'qa' => 'heroku-app-qa' } }
 
-    before { Hanzo::Installers::Remotes.stub(:environments).and_return(heroku_remotes) }
+    before { expect(Hanzo::Installers::Remotes).to receive(:environments).and_return(heroku_remotes) }
 
     describe :compare do
       let(:action) { 'compare' }
@@ -31,16 +31,16 @@ describe Hanzo::CLI do
       end
 
       before do
-        Hanzo.should_receive(:title).with(fetch_environment_title)
-        Hanzo.should_receive(:title).with(compare_environment_title)
+        expect(Hanzo).to receive(:title).with(fetch_environment_title)
+        expect(Hanzo).to receive(:title).with(compare_environment_title)
 
-        Hanzo.should_receive(:run).with("#{config_cmd} -r #{environment_one_name}", true).and_return(environment_one)
-        Hanzo.should_receive(:run).with("#{config_cmd} -r #{environment_two_name}", true).and_return(environment_two)
+        expect(Hanzo).to receive(:run).with("#{config_cmd} -r #{environment_one_name}", true).and_return(environment_one)
+        expect(Hanzo).to receive(:run).with("#{config_cmd} -r #{environment_two_name}", true).and_return(environment_two)
 
-        Hanzo.should_receive(:print).with("Missing variables in #{environment_one_name}", :yellow)
-        Hanzo.should_receive(:print).with(['- SMTP_USERNAME'])
-        Hanzo.should_receive(:print).with("Missing variables in #{environment_two_name}", :yellow)
-        Hanzo.should_receive(:print).with(['- SMTP_PASSWORD', '- SMTP_HOST'])
+        expect(Hanzo).to receive(:print).with("Missing variables in #{environment_one_name}", :yellow)
+        expect(Hanzo).to receive(:print).with(['- SMTP_USERNAME'])
+        expect(Hanzo).to receive(:print).with("Missing variables in #{environment_two_name}", :yellow)
+        expect(Hanzo).to receive(:print).with(['- SMTP_PASSWORD', '- SMTP_HOST'])
       end
 
       it 'should install specified labs for each environment' do

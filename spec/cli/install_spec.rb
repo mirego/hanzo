@@ -14,16 +14,16 @@ describe Hanzo::CLI do
       let(:enable_labs_info) { '- Enabled for' }
 
       before do
-        Hanzo::Installers::Remotes.stub(:environments).and_return(heroku_remotes)
-        Hanzo::Heroku.stub(:available_labs).and_return(available_labs)
-        Hanzo.should_receive(:title).with(labs_title)
+        expect(Hanzo::Installers::Remotes).to receive(:environments).and_return(heroku_remotes)
+        expect(Hanzo::Heroku).to receive(:available_labs).and_return(available_labs)
+        expect(Hanzo).to receive(:title).with(labs_title)
 
         available_labs.each do |name, _|
-          Hanzo.should_receive(:agree).with("Add #{name}?").and_return(true)
+          expect(Hanzo).to receive(:agree).with("Add #{name}?").and_return(true)
 
           heroku_remotes.each do |env, _|
-            Hanzo.should_receive(:run).with("#{enable_labs_cmd} #{name} --remote #{env}")
-            Hanzo.should_receive(:print).with("#{enable_labs_info} #{env}")
+            expect(Hanzo).to receive(:run).with("#{enable_labs_cmd} #{name} --remote #{env}")
+            expect(Hanzo).to receive(:print).with("#{enable_labs_info} #{env}")
           end
         end
       end
@@ -37,15 +37,16 @@ describe Hanzo::CLI do
       let(:type) { 'remotes' }
       let(:create_remotes_title) { 'Creating git remotes' }
 
-      before { Hanzo.should_receive(:title).with(create_remotes_title) }
+      before { expect(Hanzo).to receive(:title).with(create_remotes_title) }
 
       context '.heroku-remotes exists' do
         before do
-          Hanzo::Installers::Remotes.stub(:environments).and_return(heroku_remotes)
+          expect(Hanzo::Installers::Remotes).to receive(:environments).and_return(heroku_remotes)
+
           heroku_remotes.each do |env, app|
-            Hanzo.should_receive(:print).with("Adding #{env}")
-            Hanzo.should_receive(:run).with("git remote rm #{env} 2>&1 > /dev/null")
-            Hanzo.should_receive(:run).with("git remote add #{env} git@heroku.com:#{app}.git")
+            expect(Hanzo).to receive(:print).with("Adding #{env}")
+            expect(Hanzo).to receive(:run).with("git remote rm #{env} 2>&1 > /dev/null")
+            expect(Hanzo).to receive(:run).with("git remote add #{env} git@heroku.com:#{app}.git")
           end
         end
 
@@ -55,10 +56,10 @@ describe Hanzo::CLI do
       end
 
       context '.heroku-remotes file is missing' do
-        before { Hanzo.should_receive(:print).twice }
+        before { expect(Hanzo).to receive(:print).twice }
 
         it 'should display error message' do
-          lambda { install! }.should raise_error SystemExit
+          expect { install! }.to raise_error SystemExit
         end
       end
     end

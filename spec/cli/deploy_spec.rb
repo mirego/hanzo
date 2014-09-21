@@ -17,10 +17,9 @@ describe Hanzo::CLI do
     let(:deploy_cmd) { "git push -f #{env} #{branch}:master" }
 
     before do
-      Dir.should_receive(:exist?).with(migration_dir).and_return(migrations_exist)
-      Hanzo::Installers::Remotes.stub(:environments).and_return(heroku_remotes)
-      Hanzo.should_receive(:ask).with(deploy_question).and_return(branch)
-      Hanzo.should_receive(:run).with(deploy_cmd).once
+      expect(Dir).to receive(:exist?).with(migration_dir).and_return(migrations_exist)
+      expect(Hanzo).to receive(:ask).with(deploy_question).and_return(branch)
+      expect(Hanzo).to receive(:run).with(deploy_cmd).once
     end
 
     context 'without migration' do
@@ -34,9 +33,9 @@ describe Hanzo::CLI do
 
       context 'that should be ran' do
         before do
-          Hanzo.should_receive(:agree).with(migration_question).and_return(true)
-          Hanzo.should_receive(:run).with(migration_cmd)
-          Hanzo.should_receive(:run).with(restart_cmd)
+          expect(Hanzo).to receive(:agree).with(migration_question).and_return(true)
+          expect(Hanzo).to receive(:run).with(migration_cmd)
+          expect(Hanzo).to receive(:run).with(restart_cmd)
         end
 
         it 'should run migrations' do
@@ -46,9 +45,9 @@ describe Hanzo::CLI do
 
       context 'that should not be ran' do
         before do
-          Hanzo.should_receive(:agree).with(migration_question).and_return(false)
-          Hanzo.should_not_receive(:run).with(migration_cmd)
-          Hanzo.should_not_receive(:run).with(restart_cmd)
+          expect(Hanzo).to receive(:agree).with(migration_question).and_return(false)
+          expect(Hanzo).not_to receive(:run).with(migration_cmd)
+          expect(Hanzo).not_to receive(:run).with(restart_cmd)
         end
 
         it 'should not run migrations' do
