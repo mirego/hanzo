@@ -17,7 +17,7 @@ describe Hanzo::CLI do
     let(:deploy_cmd) { "git push -f #{env} #{branch}:master" }
 
     before do
-      Dir.should_receive(:exists?).with(migration_dir).and_return(migrations_exist)
+      Dir.should_receive(:exist?).with(migration_dir).and_return(migrations_exist)
       Hanzo::Installers::Remotes.stub(:environments).and_return(heroku_remotes)
       Hanzo.should_receive(:ask).with(deploy_question).and_return(branch)
       Hanzo.should_receive(:run).with(deploy_cmd).once

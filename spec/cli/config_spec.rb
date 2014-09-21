@@ -16,19 +16,19 @@ describe Hanzo::CLI do
 
       let(:environment_one_name) { 'production' }
       let(:environment_two_name) { 'qa' }
-      let(:environment_one) {
-<<-RUBY
-SMTP_PORT:     25
-SMTP_PASSWORD: hanzo
-SMTP_HOST:     localhost
-RUBY
-      }
-      let(:environment_two) {
-<<-RUBY
-SMTP_PORT:     25
-SMTP_USERNAME: hanzo
-RUBY
-      }
+      let(:environment_one) do
+        <<-RUBY.unindent
+        SMTP_PORT:     25
+        SMTP_PASSWORD: hanzo
+        SMTP_HOST:     localhost
+        RUBY
+      end
+      let(:environment_two) do
+        <<-RUBY.unindent
+        SMTP_PORT:     25
+        SMTP_USERNAME: hanzo
+        RUBY
+      end
 
       before do
         Hanzo.should_receive(:title).with(fetch_environment_title)

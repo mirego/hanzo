@@ -3,7 +3,7 @@ require 'hanzo/modules/install'
 require 'hanzo/modules/config'
 
 module Hanzo
- class CLI < Base
+  class CLI < Base
     def run
       @options.parse!(@args) if @opts.respond_to? :parse!
       puts @options unless @options.to_s == "Usage: hanzo [options]\n"
@@ -16,7 +16,7 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help and return if @app.nil?
+      initialize_help && return if @app.nil?
 
       begin
         @options = Hanzo.const_get(@app.capitalize).new(@args).options

@@ -13,7 +13,7 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help and return if @type.nil?
+      initialize_help && return if @type.nil?
 
       method = "install_#{@type}"
 
