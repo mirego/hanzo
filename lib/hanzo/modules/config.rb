@@ -1,11 +1,10 @@
 module Hanzo
   class Config < Base
-
     def compare
-      Hanzo.title "Fetching environment variables"
+      Hanzo.title('Fetching environment variables')
       fetch_variables
 
-      Hanzo.title "Comparing environment variables"
+      Hanzo.title('Comparing environment variables')
       compare_variables
     end
 
@@ -16,7 +15,8 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help and return if @type != "compare"
+      initialize_help && return if @type != 'compare'
+
       compare
     end
 
@@ -32,7 +32,7 @@ module Hanzo
   private
 
     def fetch_variables
-      @variables = Hanzo::Installers::Remotes.environments.keys.inject({}) do |memo, env|
+      @variables = Hanzo::Installers::Remotes.environments.keys.reduce({}) do |memo, env|
         # Fetch the variables over at Heroku
         config = Hanzo.run("heroku config -r #{env}", true).split("\n")
 

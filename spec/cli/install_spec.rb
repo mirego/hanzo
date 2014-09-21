@@ -10,7 +10,7 @@ describe Hanzo::CLI do
       let(:labs_title) { 'Activating Heroku Labs' }
       let(:available_labs) { { 'user-env-compile' => 'Description' } }
 
-      let(:enable_labs_cmd) { "heroku labs:enable" }
+      let(:enable_labs_cmd) { 'heroku labs:enable' }
       let(:enable_labs_info) { '- Enabled for' }
 
       before do
@@ -18,10 +18,10 @@ describe Hanzo::CLI do
         Hanzo::Heroku.stub(:available_labs).and_return(available_labs)
         Hanzo.should_receive(:title).with(labs_title)
 
-        available_labs.each do |name, description|
+        available_labs.each do |name, _|
           Hanzo.should_receive(:agree).with("Add #{name}?").and_return(true)
 
-          heroku_remotes.each do |env, app|
+          heroku_remotes.each do |env, _|
             Hanzo.should_receive(:run).with("#{enable_labs_cmd} #{name} --remote #{env}")
             Hanzo.should_receive(:print).with("#{enable_labs_info} #{env}")
           end

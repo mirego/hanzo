@@ -1,18 +1,14 @@
 module Hanzo
   class Deploy < Base
-
   protected
 
     def initialize_variables
       @env = extract_argument(1)
-
-      if @env.nil? and Hanzo::Installers::Remotes.environments.keys.length == 1
-        @env = Hanzo::Installers::Remotes.environments.keys.first
-      end
+      @env ||= Hanzo::Installers::Remotes.environments.keys.first
     end
 
     def initialize_cli
-      initialize_help and return if @env.nil?
+      initialize_help && return if @env.nil?
 
       deploy
       run_migrations
@@ -31,20 +27,17 @@ module Hanzo
     end
 
     def deploy
-      branch = Hanzo.ask("Branch to deploy in #{@env}:") { |q| q.default = "HEAD" }
+      branch = Hanzo.ask("Branch to deploy in #{@env}:") { |q| q.default = 'HEAD' }
 
       Hanzo.run "git push -f #{@env} #{branch}:master"
     end
 
     def run_migrations
-      if Dir.exists?('db/migrate')
-        migration = Hanzo.agree('Run migrations?')
+      return unless Dir.exist?('db/migrate')
+      return unless Hanzo.agree('Run migrations?')
 
-        if migration
-          Hanzo.run "heroku run rake db:migrate --remote #{@env}"
-          Hanzo.run "heroku ps:restart --remote #{@env}"
-        end
-      end
+      Hanzo.run "heroku run rake db:migrate --remote #{@env}"
+      Hanzo.run "heroku ps:restart --remote #{@env}"
     end
   end
 end

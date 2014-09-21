@@ -2,13 +2,13 @@ module Hanzo
   module Installers
     module Labs
       def install_labs
-        Hanzo.title 'Activating Heroku Labs'
+        Hanzo.title('Activating Heroku Labs')
 
-        Hanzo::Heroku.available_labs.each do |name, description|
-          if Hanzo.agree("Add #{name}?")
-            Hanzo::Installers::Remotes.environments.each_pair do |env, app|
-              Hanzo::Installers::Labs.enable(env, name)
-            end
+        Hanzo::Heroku.available_labs.each do |name, _|
+          next unless Hanzo.agree("Add #{name}?")
+
+          Hanzo::Installers::Remotes.environments.each_pair do |env, _|
+            Hanzo::Installers::Labs.enable(env, name)
           end
         end
       end
