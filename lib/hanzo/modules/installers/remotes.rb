@@ -22,6 +22,10 @@ module Hanzo
         Hanzo.print 'For more information, please read https://github.com/mirego/hanzo'
         exit
       end
+
+      def self.installed_environments
+        `git remote`.split("\n")
+      end
     end
   end
 end

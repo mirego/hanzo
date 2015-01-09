@@ -7,6 +7,8 @@ require 'hanzo/cli'
 require 'hanzo/heroku'
 require 'hanzo/version'
 
+require 'hanzo/fetchers/environment'
+
 module Hanzo
   def self.run(command, fetch_output = false)
     print(command, :green)
@@ -35,6 +37,11 @@ module Hanzo
     colors = colors.map { |c| HighLine.const_get(c.to_s.upcase) }
     text = text.join("\n       ") if text.is_a?(Array)
     HighLine.say HighLine.color("       #{text}", *colors)
+  end
+
+  def self.unindent_print(text = '', *colors)
+    colors = colors.map { |c| HighLine.const_get(c.to_s.upcase) }
+    HighLine.say HighLine.color(text, *colors)
   end
 
   def self.title(text)
