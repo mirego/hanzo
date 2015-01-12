@@ -17,6 +17,9 @@ describe Hanzo::CLI do
     let(:deploy_cmd) { "git push -f #{env} #{branch}:master" }
 
     before do
+      expect(Hanzo::Installers::Remotes).to receive(:environments).and_return(['production'])
+      expect(Hanzo::Installers::Remotes).to receive(:installed_environments).and_return(['production'])
+
       expect(Dir).to receive(:exist?).with(migration_dir).and_return(migrations_exist)
       expect(Hanzo).to receive(:ask).with(deploy_question).and_return(branch)
       expect(Hanzo).to receive(:run).with(deploy_cmd).once
@@ -38,9 +41,7 @@ describe Hanzo::CLI do
           expect(Hanzo).to receive(:run).with(restart_cmd)
         end
 
-        it 'should run migrations' do
-          deploy!
-        end
+        specify { deploy! }
       end
 
       context 'that should not be ran' do
@@ -50,9 +51,7 @@ describe Hanzo::CLI do
           expect(Hanzo).not_to receive(:run).with(restart_cmd)
         end
 
-        it 'should not run migrations' do
-          deploy!
-        end
+        specify { deploy! }
       end
     end
   end
