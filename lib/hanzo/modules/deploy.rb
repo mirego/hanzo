@@ -13,8 +13,7 @@ module Hanzo
     def initialize_cli
       initialize_help && return if @env.nil?
 
-      deploy
-      run_migrations
+      deploy && run_migrations
     rescue UnknownEnvironment
       Hanzo.unindent_print "Environment `#{@env}` doesn't exist. Add it to .heroku-remotes and run:\n  hanzo install remotes", :red
       Hanzo.unindent_print "\nFor more information, read https://github.com/mirego/hanzo#install-remotes", :red
