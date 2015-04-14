@@ -18,7 +18,7 @@ module Hanzo
       if fetch_output
         output = `#{command}`
       else
-        system(command)
+        output = system(command)
       end
     end
 
