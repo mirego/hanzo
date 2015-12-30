@@ -4,6 +4,12 @@ module Hanzo
     UnknownEnvironment = Class.new(StandardError)
     UninstalledEnvironment = Class.new(StandardError)
 
+    # Constants
+    MIGRATION_COMMANDS = {
+      'db/migrate' => 'rake db:migrate',
+      'priv/repo/migrations' => 'mix ecto.migrate'
+    }
+
   protected
 
     def initialize_variables
@@ -43,10 +49,10 @@ module Hanzo
     end
 
     def run_migrations
-      return unless Dir.exist?('db/migrate')
-      return unless Hanzo.agree('Run migrations?')
+      return if migration_directory.nil?
+      return unless Hanzo.agree('Run database migrations?')
 
-      Hanzo.run "heroku run rake db:migrate --remote #{@env}"
+      Hanzo.run "heroku run #{migration_command} --remote #{@env}"
       Hanzo.run "heroku ps:restart --remote #{@env}"
     end
 
@@ -57,6 +63,14 @@ module Hanzo
 
     def fetcher
       @fetcher ||= Hanzo::Fetchers::Environment.new(@env)
+    end
+
+    def migration_directory
+      MIGRATION_COMMANDS.keys.find { |directory| Dir.exist?(directory) }
+    end
+
+    def migration_command
+      MIGRATION_COMMANDS[migration_directory]
     end
   end
 end
