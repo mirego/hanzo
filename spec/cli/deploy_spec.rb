@@ -8,7 +8,7 @@ describe Hanzo::CLI do
     let(:heroku_remotes) { { 'production' => 'heroku-app-production' } }
     let(:migration_dir) { 'db/migrate' }
 
-    let(:migration_question) { 'Run migrations?' }
+    let(:migration_question) { 'Run database migrations?' }
     let(:deploy_question) { "Branch to deploy in #{env}:" }
 
     let(:migration_cmd) { "heroku run rake db:migrate --remote #{env}" }
@@ -25,7 +25,7 @@ describe Hanzo::CLI do
       let(:deploy_result) { true }
 
       before do
-        expect(Dir).to receive(:exist?).with(migration_dir).and_return(migrations_exist)
+        expect(Dir).to receive(:exist?).with(instance_of(String)).at_least(:once).and_return(migrations_exist)
         expect(Hanzo).to receive(:ask).with(deploy_question).and_return(branch)
         expect(Hanzo).to receive(:run).with(deploy_cmd).once.and_return(deploy_result)
       end
@@ -47,7 +47,7 @@ describe Hanzo::CLI do
         let(:deploy_result) { true }
 
         before do
-          expect(Dir).to receive(:exist?).with(migration_dir).and_return(migrations_exist)
+          expect(Dir).to receive(:exist?).with(instance_of(String)).at_least(:once).and_return(migrations_exist)
         end
 
         context 'and migrations that should be ran' do
