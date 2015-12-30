@@ -1,5 +1,6 @@
 module Hanzo
   class Base
+    # Accessors
     attr_accessor :options
 
     def initialize(args)

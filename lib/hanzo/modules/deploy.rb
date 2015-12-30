@@ -1,5 +1,6 @@
 module Hanzo
   class Deploy < Base
+    # Classes
     UnknownEnvironment = Class.new(StandardError)
     UninstalledEnvironment = Class.new(StandardError)
 
