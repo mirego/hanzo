@@ -1,4 +1,5 @@
 require 'hanzo/modules/deploy'
+require 'hanzo/modules/diff'
 require 'hanzo/modules/install'
 require 'hanzo/modules/config'
 
@@ -31,6 +32,7 @@ module Hanzo
 
         Available actions:
            deploy - Deploy a branch or a tag
+             diff - Show the diff between HEAD and the current release
           install - Install Hanzo configuration
            config - Manage Heroku configuration variables
 
