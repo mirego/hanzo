@@ -31,6 +31,7 @@ module Hanzo
 
         Available install type:
           remotes - Add git remotes to current repository
+             labs - Enable specific labs for all environments
       BANNER
     end
   end
