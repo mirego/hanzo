@@ -16,11 +16,7 @@ module Hanzo
       end
 
       def self.environments
-        return YAML.load_file('.heroku-remotes') if File.exist?('.heroku-remotes')
-
-        Hanzo.print 'Cannot locate .heroku-remotes'
-        Hanzo.print 'For more information, please read https://github.com/mirego/hanzo'
-        exit
+        Hanzo.config['remotes']
       end
 
       def self.installed_environments

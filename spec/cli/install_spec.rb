@@ -39,7 +39,7 @@ describe Hanzo::CLI do
 
       before { expect(Hanzo).to receive(:title).with(create_remotes_title) }
 
-      context '.heroku-remotes exists' do
+      context '.hanzo.yml exists' do
         before do
           expect(Hanzo::Installers::Remotes).to receive(:environments).and_return(heroku_remotes)
 
@@ -55,7 +55,7 @@ describe Hanzo::CLI do
         end
       end
 
-      context '.heroku-remotes file is missing' do
+      context '.hanzo.yml file is missing' do
         before { expect(Hanzo).to receive(:print).twice }
 
         it 'should display error message' do
