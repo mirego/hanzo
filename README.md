@@ -3,7 +3,7 @@
     <img src="http://i.imgur.com/RZbJy1u.png" alt="Hanzo" />
   </a>
   <br />
-  Hanzo is a sharp tool to handle deployments in multiple environments on Heroku.
+  Hanzo is a sharp tool to handle deployments of multiple environments of the same application on Heroku.
   <br /><br />
   <a href="https://rubygems.org/gems/hanzo"><img src="https://badge.fury.io/rb/hanzo.png" /></a>
   <a href="https://codeclimate.com/github/mirego/hanzo"><img src="https://codeclimate.com/github/mirego/hanzo.png" /></a>
@@ -14,7 +14,7 @@
 
 ## Installation
 
-Add this line to your application’s Gemfile:
+Add this line to your application’s `Gemfile`:
 
 ```ruby
 gem 'hanzo'
@@ -22,18 +22,19 @@ gem 'hanzo'
 
 ## Usage
 
-Create an `.heroku-remotes` file at the root of your app that will contain the name of the
-environment as the key and the Heroku app name as the value.
+Create an `.hanzo.yml` file at the root of your app that will contain a map of
+remotes, with the remote as the key and the Heroku application name as the value.
 
 ```yaml
-qa: heroku-app-name-qa
-staging: heroku-app-name-staging
-production: heroku-app-name-production
+remotes:
+  qa: heroku-app-name-qa
+  staging: heroku-app-name-staging
+  production: heroku-app-name-production
 ```
 
 ### Install remotes
 
-Whenever you add a new environment to your `.heroku-remotes` file, you'll have to install those
+Whenever you add a new remote to your `.hanzo.yml` file, you'll have to install those
 remotes locally by running `hanzo install`.
 
 ```bash
@@ -61,8 +62,8 @@ remotes locally by running `hanzo install`.
 
 ### Install labs
 
-Once all your environments are activated, you might want to enable some
-Heroku labs feature for all your environments.
+Once all your remotes are installed, you might want to enable some
+Heroku labs feature for all of them.
 
 ```bash
 > bundle exec hanzo install labs

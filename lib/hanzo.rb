@@ -55,6 +55,15 @@ module Hanzo
   def self.ask(question, &blk)
     HighLine.ask "-----> #{question} ", &blk
   end
+
+  def self.config
+    return YAML.load_file('.hanzo.yml') if File.exist?('.hanzo.yml')
+
+    Hanzo.print 'Cannot locate .hanzo.yml'
+    Hanzo.print 'For more information, please read https://github.com/mirego/hanzo'
+
+    exit
+  end
 end
 
 class String
