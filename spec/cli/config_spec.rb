@@ -43,7 +43,7 @@ describe Hanzo::CLI do
         expect(Hanzo).to receive(:print).with(['- SMTP_PASSWORD', '- SMTP_HOST'])
       end
 
-      it 'should install specified labs for each environment' do
+      it 'should list missing variables for all environments' do
         config!
       end
     end
