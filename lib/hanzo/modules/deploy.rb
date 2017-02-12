@@ -4,12 +4,6 @@ module Hanzo
     UnknownEnvironment = Class.new(StandardError)
     UninstalledEnvironment = Class.new(StandardError)
 
-    # Constants
-    MIGRATION_COMMANDS = {
-      'db/migrate' => 'rake db:migrate',
-      'priv/repo/migrations' => 'mix ecto.migrate'
-    }
-
   protected
 
     def initialize_variables
@@ -20,7 +14,7 @@ module Hanzo
     def initialize_cli
       initialize_help && return if @env.nil?
 
-      deploy && run_migrations
+      deploy && run_after_deploy_commands
     rescue UnknownEnvironment
       Hanzo.unindent_print "Environment `#{@env}` doesn't exist. Add it to .hanzo.yml and run:\n  hanzo install remotes", :red
       Hanzo.unindent_print "\nFor more information, read https://github.com/mirego/hanzo#install-remotes", :red
@@ -48,12 +42,19 @@ module Hanzo
       Hanzo.run "git push -f #{@env} #{branch}:master"
     end
 
-    def run_migrations
-      return if migration_directory.nil?
-      return unless Hanzo.agree('Run database migrations?')
+    def run_after_deploy_commands
+      return unless after_deploy_commands.any?
 
-      Hanzo.run "heroku run #{migration_command} --remote #{@env}"
+      after_deploy_commands.each do |command|
+        next unless Hanzo.agree("Run `#{command}` on #{@env}?")
+        Hanzo.run "heroku run #{command} --remote #{@env}"
+      end
+
       Hanzo.run "heroku ps:restart --remote #{@env}"
+    end
+
+    def after_deploy_commands
+      Hanzo.config['after_deploy'] || []
     end
 
     def validate_environment_existence!
@@ -63,14 +64,6 @@ module Hanzo
 
     def fetcher
       @fetcher ||= Hanzo::Fetchers::Environment.new(@env)
-    end
-
-    def migration_directory
-      MIGRATION_COMMANDS.keys.find { |directory| Dir.exist?(directory) }
-    end
-
-    def migration_command
-      MIGRATION_COMMANDS[migration_directory]
     end
   end
 end

@@ -25,11 +25,17 @@ gem 'hanzo'
 Create an `.hanzo.yml` file at the root of your app that will contain a map of
 remotes, with the remote as the key and the Heroku application name as the value.
 
+You can also specify commands that can be ran on the application after a
+successful deploy. Hanzo will prompt to run each of them, they each will be ran
+with `heroku run` and the application will be restarted at the end.
+
 ```yaml
 remotes:
   qa: heroku-app-name-qa
   staging: heroku-app-name-staging
   production: heroku-app-name-production
+after_deploy:
+  - rake db:migrate
 ```
 
 ### Install remotes
