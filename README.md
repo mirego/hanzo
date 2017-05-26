@@ -5,9 +5,10 @@
   <br />
   Hanzo is a sharp tool to handle deployments of multiple environments of the same application on Heroku.
   <br /><br />
-  <a href="https://rubygems.org/gems/hanzo"><img src="https://badge.fury.io/rb/hanzo.png" /></a>
-  <a href="https://codeclimate.com/github/mirego/hanzo"><img src="https://codeclimate.com/github/mirego/hanzo.png" /></a>
-  <a href="https://travis-ci.org/mirego/hanzo"><img src="https://travis-ci.org/mirego/hanzo.png?branch=master" /></a>
+  <a href="https://rubygems.org/gems/hanzo"><img src="http://img.shields.io/gem/v/hanzo.svg" /></a>
+  <a href="https://codeclimate.com/github/mirego/hanzo"><img src="http://img.shields.io/codeclimate/github/mirego/hanzo.svg" /></a>
+  <a href='https://gemnasium.com/mirego/hanzo'><img src="http://img.shields.io/gemnasium/mirego/hanzo.svg" /></a>
+  <a href="https://travis-ci.org/mirego/hanzo"><img src="http://img.shields.io/travis/mirego/hanzo.svg" /></a>
 </p>
 
 ---
@@ -87,7 +88,7 @@ Heroku labs feature for all of them.
 
 ## License
 
-`Hanzo` is © 2017 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/hanzo/blob/master/LICENSE.md) file.
+`Hanzo` is © 2013-2017 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/hanzo/blob/master/LICENSE.md) file.
 
 ## About Mirego
 
