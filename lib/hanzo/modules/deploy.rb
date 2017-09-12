@@ -45,12 +45,15 @@ module Hanzo
     def run_after_deploy_commands
       return unless after_deploy_commands.any?
 
+      restart_needed = false
+
       after_deploy_commands.each do |command|
         next unless Hanzo.agree("Run `#{command}` on #{@env}?")
         Hanzo.run "heroku run #{command} --remote #{@env}"
+        restart_needed = true
       end
 
-      Hanzo.run "heroku ps:restart --remote #{@env}"
+      Hanzo.run "heroku ps:restart --remote #{@env}" if restart_needed
     end
 
     def after_deploy_commands
