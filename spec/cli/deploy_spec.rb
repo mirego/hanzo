@@ -39,14 +39,33 @@ describe Hanzo::CLI do
         let(:deploy_result) { true }
 
         before do
-          expect(Hanzo).to receive(:agree).with('Run `foo` on production?').and_return(true)
-          expect(Hanzo).to receive(:run).with('heroku run foo --remote production')
-          expect(Hanzo).to receive(:agree).with('Run `bar` on production?').and_return(true)
-          expect(Hanzo).to receive(:run).with('heroku run bar --remote production')
-          expect(Hanzo).to receive(:run).with('heroku ps:restart --remote production')
+          expect(Hanzo).to receive(:agree).with('Run `foo` on production?').and_return(agree_after_deploy_result)
+          expect(Hanzo).to receive(:agree).with('Run `bar` on production?').and_return(agree_after_deploy_result)
         end
 
-        specify { deploy! }
+        context 'with after_deploy commands skipped' do
+          let(:agree_after_deploy_result) { false }
+
+          before do
+            expect(Hanzo).not_to receive(:run).with('heroku run foo --remote production')
+            expect(Hanzo).not_to receive(:run).with('heroku run bar --remote production')
+            expect(Hanzo).not_to receive(:run).with('heroku ps:restart --remote production')
+          end
+
+          specify { deploy! }
+        end
+
+        context 'without after_deploy commands skipped' do
+          let(:agree_after_deploy_result) { true }
+
+          before do
+            expect(Hanzo).to receive(:run).with('heroku run foo --remote production')
+            expect(Hanzo).to receive(:run).with('heroku run bar --remote production')
+            expect(Hanzo).to receive(:run).with('heroku ps:restart --remote production')
+          end
+
+          specify { deploy! }
+        end
       end
 
       context 'without successful deploy' do
