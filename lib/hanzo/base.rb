@@ -12,7 +12,7 @@ module Hanzo
     end
 
     def extract_argument(index)
-      (@args[index] =~ /-/) ? nil : @args[index]
+      @args[index]
     end
   end
 end
