@@ -9,6 +9,7 @@ module Hanzo
     def initialize_variables
       @env = extract_argument(1)
       @env ||= Hanzo::Installers::Remotes.environments.keys.first
+      @branch = extract_argument(2)
     end
 
     def initialize_cli
@@ -37,7 +38,7 @@ module Hanzo
     def deploy
       validate_environment_existence!
 
-      branch = Hanzo.ask("Branch to deploy in #{@env}:") { |q| q.default = 'HEAD' }
+      branch = @branch || Hanzo.ask("Branch to deploy in #{@env}:") { |q| q.default = 'HEAD' }
 
       Hanzo.run "git push -f #{@env} #{branch}:master"
     end
