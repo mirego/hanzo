@@ -11,6 +11,23 @@ describe Hanzo::CLI do
       expect(Hanzo::Installers::Remotes).to receive(:installed_environments).and_return(['production'])
     end
 
+    context 'deploy with specific branch' do
+      let(:deploy!) { Hanzo::CLI.new(['deploy', 'production', '2.0.0']) }
+      let(:deploy_command) { "git push -f production 2.0.0:master" }
+      let(:deploy_result) { true }
+      let(:config) { {} }
+
+      before do
+        allow(Hanzo).to receive(:config).and_return(config)
+        expect(Hanzo).not_to receive(:ask)
+        expect(Hanzo).to receive(:run).with(deploy_command).once.and_return(deploy_result)
+      end
+
+      it 'should git push to heroku upstream' do
+        deploy!
+      end
+    end
+
     context 'successful deploy and without after_deploy commands' do
       let(:deploy_result) { true }
       let(:config) { {} }
