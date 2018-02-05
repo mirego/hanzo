@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Hanzo::CLI do
   describe :deploy do
-    let(:deploy!) { Hanzo::CLI.new(['deploy', 'production']) }
+    let(:deploy!) { Hanzo::CLI.new(%w(deploy production)) }
     let(:deploy_question) { 'Branch to deploy in production:' }
-    let(:deploy_command) { "git push -f production 1.0.0:master" }
+    let(:deploy_command) { 'git push -f production 1.0.0:master' }
 
     before do
       expect(Hanzo::Installers::Remotes).to receive(:environments).and_return(['production'])
@@ -12,8 +12,8 @@ describe Hanzo::CLI do
     end
 
     context 'deploy with specific branch' do
-      let(:deploy!) { Hanzo::CLI.new(['deploy', 'production', '2.0.0']) }
-      let(:deploy_command) { "git push -f production 2.0.0:master" }
+      let(:deploy!) { Hanzo::CLI.new(%w(deploy production 2.0.0)) }
+      let(:deploy_command) { 'git push -f production 2.0.0:master' }
       let(:deploy_result) { true }
       let(:config) { {} }
 

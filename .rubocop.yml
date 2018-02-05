@@ -4,6 +4,9 @@ Documentation:
 Encoding:
   Enabled: false
 
+BlockLength:
+  Max: 100
+
 LineLength:
   Max: 200
 
@@ -17,7 +20,7 @@ IfUnlessModifier:
   Enabled: false
 
 CaseIndentation:
-  IndentWhenRelativeTo: case
+  EnforcedStyle: case
   IndentOneStep: true
 
 MethodLength:
@@ -56,3 +59,7 @@ DoubleNegation:
 
 TrivialAccessors:
   ExactNameMatch: true
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%w':    '()'

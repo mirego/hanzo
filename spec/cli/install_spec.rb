@@ -18,10 +18,10 @@ describe Hanzo::CLI do
         expect(Hanzo::Heroku).to receive(:available_labs).and_return(available_labs)
         expect(Hanzo).to receive(:title).with(labs_title)
 
-        available_labs.each do |name, _|
+        available_labs.each_key do |name|
           expect(Hanzo).to receive(:agree).with("Add #{name}?").and_return(true)
 
-          heroku_remotes.each do |env, _|
+          heroku_remotes.each_key do |env|
             expect(Hanzo).to receive(:run).with("#{enable_labs_cmd} #{name} --remote #{env}")
             expect(Hanzo).to receive(:print).with("#{enable_labs_info} #{env}")
           end

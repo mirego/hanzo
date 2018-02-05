@@ -4,7 +4,7 @@ module Hanzo
       def install_labs
         Hanzo.title('Activating Heroku Labs')
 
-        Hanzo::Heroku.available_labs.each do |name, _|
+        Hanzo::Heroku.available_labs.each_key do |name|
           next unless Hanzo.agree("Add #{name}?")
 
           Hanzo::Installers::Remotes.environments.each_pair do |env, _|

@@ -18,7 +18,7 @@ module Hanzo
 
       method = "install_#{@type}"
 
-      if self.respond_to?(method)
+      if respond_to?(method)
         send(method)
       else
         initialize_help

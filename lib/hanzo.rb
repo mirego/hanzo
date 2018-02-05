@@ -15,11 +15,11 @@ module Hanzo
     output = true
 
     _run do
-      if fetch_output
-        output = `#{command}`
-      else
-        output = system(command)
-      end
+      output = if fetch_output
+                 `#{command}`
+               else
+                 system(command)
+               end
     end
 
     output
@@ -68,6 +68,6 @@ end
 
 class String
   def unindent
-    gsub(/^#{scan(/^\s*/).min_by { |l| l.length }}/, '')
+    gsub(/^#{scan(/^\s*/).min_by(&:length)}/, '')
   end
 end

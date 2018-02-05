@@ -6,7 +6,6 @@
   Hanzo is a sharp tool to handle deployments of multiple environments of the same application on Heroku.
   <br /><br />
   <a href="https://rubygems.org/gems/hanzo"><img src="http://img.shields.io/gem/v/hanzo.svg" /></a>
-  <a href="https://codeclimate.com/github/mirego/hanzo"><img src="http://img.shields.io/codeclimate/github/mirego/hanzo.svg" /></a>
   <a href='https://gemnasium.com/mirego/hanzo'><img src="http://img.shields.io/gemnasium/mirego/hanzo.svg" /></a>
   <a href="https://travis-ci.org/mirego/hanzo"><img src="http://img.shields.io/travis/mirego/hanzo.svg" /></a>
 </p>

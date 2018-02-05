@@ -52,7 +52,7 @@ module Hanzo
       @variables.each_pair do |env, variables|
         missing_variables = all_variables - variables
         Hanzo.print "Missing variables in #{env}", :yellow
-        Hanzo.print missing_variables.map { |v| "- #{v}" }
+        Hanzo.print(missing_variables.map { |v| "- #{v}" })
       end
     end
   end
