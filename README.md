@@ -34,6 +34,7 @@ remotes:
   qa: heroku-app-name-qa
   staging: heroku-app-name-staging
   production: heroku-app-name-production
+
 after_deploy:
   - rake db:migrate
 ```
@@ -47,7 +48,9 @@ those remotes locally by running `hanzo install remotes`.
 
 ```bash
 $ hanzo install remotes
+```
 
+```
 -----> Creating git remotes
        Adding qa
         git remote rm qa 2>&1 > /dev/null
@@ -67,7 +70,9 @@ feature for all of them.
 
 ```bash
 $ hanzo install labs
+```
 
+```
 -----> Activating Heroku Labs
        Add preboot? yes
        - Enabled for qa
@@ -87,6 +92,9 @@ for one (with `HEAD` as the default value).
 
 ```bash
 $ hanzo deploy qa release/qa
+```
+
+```
        git push -f qa release/qa:master
 
        …
@@ -116,7 +124,9 @@ wrong if the application was rollbacked.
 ```
 $ hanzo diff qa
        git remote update qa && git diff qa/master...HEAD
+```
 
+```diff
 ────────────────────────────────────────────────────────────────────────────────────────────
  -- a/lib/my_app/router.ex
  ++ b/lib/my_app/router.ex
@@ -136,6 +146,9 @@ present in some environments but not all of them.
 
 ```
 $ hanzo config compare
+```
+
+```
 -----> Fetching environment variables
        heroku config -r qa
        heroku config -r staging
