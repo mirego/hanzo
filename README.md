@@ -118,13 +118,13 @@ $ hanzo diff qa
        git remote update qa && git diff qa/master...HEAD
 
 ────────────────────────────────────────────────────────────────────────────────────────────
- -- a/.travis.yml
- ++ b/.travis.yml
+ -- a/lib/my_app/router.ex
+ ++ b/lib/my_app/router.ex
 ────────────────────────────────────────────────────────────────────────────────────────────
-@@ -30,6 +30,8 @@ env:
-     - FOO: 'bar'
-+    - TEST1: 'New variable'
-+    - TEST2: 'Also, new variable'
+@@ -30,6 +30,8 @@ defmodule MyApp.Router do
+    plug(:fetch_flash)
++   plug(:protect_from_forgery)
++   plug(:put_secure_browser_headers)
 ```
 
 ### `hanzo config`
