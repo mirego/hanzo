@@ -2,6 +2,7 @@ require 'hanzo/modules/deploy'
 require 'hanzo/modules/diff'
 require 'hanzo/modules/install'
 require 'hanzo/modules/config'
+require 'hanzo/modules/console'
 
 module Hanzo
   class CLI < Base
@@ -35,6 +36,7 @@ module Hanzo
              diff - Show the diff between HEAD and the current release
           install - Install Hanzo configuration
            config - Manage Heroku configuration variables
+          console - Run a console command
 
         Options:
       BANNER
