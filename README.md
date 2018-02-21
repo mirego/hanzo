@@ -3,7 +3,7 @@
     <img src="http://i.imgur.com/RZbJy1u.png" alt="Hanzo" />
   </a>
   <br />
-  Hanzo is a sharp tool to handle deployments of multiple environments of the same application on Heroku.
+  Hanzo is a sharp tool to handle deploying an application on Heroku on multiple environments simultaneously.
   <br /><br />
   <a href="https://rubygems.org/gems/hanzo"><img src="http://img.shields.io/gem/v/hanzo.svg" /></a>
   <a href='https://gemnasium.com/mirego/hanzo'><img src="http://img.shields.io/gemnasium/mirego/hanzo.svg" /></a>
@@ -22,12 +22,12 @@ gem 'hanzo'
 
 ## Usage
 
-Create an `.hanzo.yml` file at the root of your app that will contain a map of
+Create a `.hanzo.yml` file at the root of your app that will contain a map of
 remotes, with the remote as the key and the Heroku application name as the value.
 
-You can also specify commands that can be ran on the application after a
-successful deploy. Hanzo will prompt to run each of them, they each will be ran
-with `heroku run` and the application will be restarted at the end.
+You can also use `after_deploy` to specify commands that will be run on the application
+after a successful deployment. Hanzo will prompt you before running each command,
+then use `heroku run` to execute it. The application is restarted afterwards.
 
 ```yaml
 remotes:
@@ -43,8 +43,8 @@ after_deploy:
 
 #### Remotes
 
-Whenever you add a new remote to your `.hanzo.yml` file, you'll have to install
-those remotes locally by running `hanzo install remotes`.
+Whenever you add new remotes to your `.hanzo.yml` file, you'll have to install
+them locally by running `hanzo install remotes`.
 
 ```bash
 $ hanzo install remotes
@@ -65,8 +65,8 @@ $ hanzo install remotes
 
 #### Labs
 
-Once all your remotes are installed, you might want to enable some Heroku labs
-feature for all of them.
+Once all your remotes are installed, you might want to enable Heroku labs
+features:
 
 ```bash
 $ hanzo install labs
@@ -142,7 +142,7 @@ $ hanzo diff qa
 #### Compare
 
 You can use `hanzo config compare` to find out which environment variables are
-present in some environments but not all of them.
+present in only some of your environments.
 
 ```
 $ hanzo config compare
