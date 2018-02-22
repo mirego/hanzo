@@ -37,6 +37,8 @@ remotes:
 
 after_deploy:
   - rake db:migrate
+
+console: rails console
 ```
 
 ### `hanzo install`
@@ -167,6 +169,20 @@ $ hanzo config compare
        - SMTP_PORT
        - SMTP_SERVER
        - SMTP_USER
+```
+
+### `hanzo console`
+
+You can define a `console` command in `.hanzo.yml` to quickly spawn a console
+process using `heroku run`.
+
+```bash
+$ hanzo console qa
+```
+
+```
+Running iex -S mix on heroku-app-name-qa... up
+> |
 ```
 
 ## License
