@@ -7,10 +7,10 @@ require 'hanzo/version'
 Gem::Specification.new do |spec|
   spec.name          = 'hanzo'
   spec.version       = Hanzo::VERSION
-  spec.authors       = ['Samuel Garneau']
-  spec.email         = ['sgarneau@mirego.com']
-  spec.description   = 'Hanzo is a tool to handle deployments in multiple environments on Heroku.'
-  spec.summary       = 'Hanzo is a tool to handle deployments in multiple environments on Heroku.'
+  spec.authors       = ['Samuel Garneau', 'Rémi Prévost']
+  spec.email         = ['sgarneau@mirego.com', 'rprevost@mirego.com']
+  spec.description   = 'Hanzo is a sharp tool to handle deploying an application on Heroku on multiple environments.'
+  spec.summary       = 'Hanzo is a sharp tool to handle deploying an application on Heroku on multiple environments.'
   spec.homepage      = 'https://github.com/mirego/hanzo'
   spec.license       = 'BSD 3-Clause'
 
