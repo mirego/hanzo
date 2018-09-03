@@ -1,14 +1,7 @@
-require 'hanzo/modules/deploy'
-require 'hanzo/modules/diff'
-require 'hanzo/modules/install'
-require 'hanzo/modules/config'
-require 'hanzo/modules/console'
-
 module Hanzo
   class CLI < Base
     def run
-      @options.parse!(@args) if @opts.respond_to? :parse!
-      puts @options unless @options.to_s == "Usage: hanzo [options]\n"
+      @options.parse!(@args) if @options.respond_to?(:parse!)
     end
 
   protected
@@ -17,13 +10,21 @@ module Hanzo
       @app = extract_argument(0)
     end
 
+    def initialize_options
+      @options.on('-h', '--help', 'You\'re looking at it.') { puts @options }
+      @options.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
+    end
+
     def initialize_cli
-      initialize_help && return if @app.nil?
+      return true if /^-/.match?(@app)
+      return false if @app.nil?
 
       begin
         @options = Hanzo.const_get(@app.capitalize).new(@args).options
       rescue NameError
-        initialize_help
+        return false
+      ensure
+        true
       end
     end
 
@@ -40,8 +41,6 @@ module Hanzo
 
         Options:
       BANNER
-      @options.on('-h', '--help', 'You\'re looking at it.') { puts @options }
-      @options.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
     end
   end
 end

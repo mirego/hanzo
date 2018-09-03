@@ -1,11 +1,10 @@
-require 'hanzo/modules/installers/remotes'
-require 'hanzo/modules/installers/labs'
+# Installers
+require_relative 'installers/remotes'
 
 module Hanzo
   class Install < Base
     # Mixins
     include Hanzo::Installers::Remotes
-    include Hanzo::Installers::Labs
 
   protected
 
@@ -31,7 +30,6 @@ module Hanzo
 
         Available install type:
           remotes - Add git remotes to current repository
-             labs - Enable specific labs for all environments
       BANNER
     end
   end

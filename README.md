@@ -3,7 +3,7 @@
     <img src="http://i.imgur.com/RZbJy1u.png" alt="Hanzo" />
   </a>
   <br />
-  Hanzo is a sharp tool to handle deploying an application on Heroku on multiple environments.
+  Hanzo is a sharp tool to handle deploying an application on Heroku/Dokku on multiple environments.
   <br /><br />
   <a href="https://rubygems.org/gems/hanzo"><img src="http://img.shields.io/gem/v/hanzo.svg" /></a>
   <a href='https://gemnasium.com/mirego/hanzo'><img src="http://img.shields.io/gemnasium/mirego/hanzo.svg" /></a>
@@ -23,17 +23,38 @@ gem 'hanzo'
 ## Usage
 
 Create a `.hanzo.yml` file at the root of your app that will contain a map of
-remotes, with the remote as the key and the Heroku application name as the value.
+remotes, with the remote as the key and the Heroku/Dokku application name as the value.
 
 You can also use `after_deploy` to specify commands that will be run on the application
 after a successful deployment. Hanzo will prompt you before running each command,
 then use `heroku run` to execute it. The application is restarted afterwards.
 
+### Heroku
+
 ```yaml
+provider: heroku
+
 remotes:
   qa: heroku-app-name-qa
   staging: heroku-app-name-staging
   production: heroku-app-name-production
+
+after_deploy:
+  - rake db:migrate
+
+console: rails console
+```
+
+### Dokku
+
+```yaml
+provider: dokku
+host: dokku@dokku.example.me
+
+remotes:
+  qa: dokku-app-name-qa
+  staging: dokku-app-name-staging
+  production: dokku-app-name-production
 
 after_deploy:
   - rake db:migrate
@@ -55,35 +76,14 @@ $ hanzo install remotes
 ```
 -----> Creating git remotes
        Adding qa
-        git remote rm qa 2>&1 > /dev/null
-        git remote add qa git@heroku.com:heroku-app-name-qa.git
+       git remote rm qa 2>&1 > /dev/null
+       git remote add qa git@heroku.com:heroku-app-name-qa.git
        Adding staging
-        git remote rm staging 2>&1 > /dev/null
-        git remote add staging git@heroku.com:heroku-app-name-staging.git
+       git remote rm staging 2>&1 > /dev/null
+       git remote add staging git@heroku.com:heroku-app-name-staging.git
        Adding production
-        git remote rm production 2>&1 > /dev/null
-        git remote add production git@heroku.com:heroku-app-name-production.git
-```
-
-#### Labs
-
-Once all your remotes are installed, you might want to enable Heroku labs
-features:
-
-```bash
-$ hanzo install labs
-```
-
-```
------> Activating Heroku Labs
-       Add preboot? yes
-       - Enabled for qa
-       - Enabled for staging
-       - Enabled for production
-       Add user-env-compile? yes
-       - Enabled for qa
-       - Enabled for staging
-       - Enabled for production
+       git remote rm production 2>&1 > /dev/null
+       git remote add production git@heroku.com:heroku-app-name-production.git
 ```
 
 ### `hanzo deploy`
@@ -97,19 +97,26 @@ $ hanzo deploy qa release/qa
 ```
 
 ```
-       git push -f qa release/qa:master
-
-       …
+git push -f qa release/qa:master
 
 remote: Verifying deploy... done.
 To heroku.com:heroku-app-name-qa.git
-   550c719..27e3538  release/qa -> master
+550c719..27e3538  release/qa -> master
 
-       Run `rake db:migrate` on qa? y
+…
+```
+
+After a successful deployment, Hanzo will prompt the `after_deploy` commands
+you listed in the `.hanzo.yml` file. If one of the `after_deploy` command is
+ran, Hanzo will restart the application.
+
+```
+-----> Run `rake db:migrate` on qa? y
        heroku run rake db:migrate --remote qa
 
 Running rake db:migrate on heroku-app-name-qa...
-15:45:26.380 [info] Already up
+
+-----> Restarting application
        heroku ps:restart --remote qa
 
 Restarting dynos on heroku-app-name-qa...

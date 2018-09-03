@@ -12,9 +12,11 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help && return if @env.nil?
+      return false if @env.nil?
 
       diff
+
+      true
     rescue UnknownEnvironment
       Hanzo.unindent_print "Environment `#{@env}` doesn't exist. Add it to .hanzo.yml and run:\n  hanzo install remotes", :red
       Hanzo.unindent_print "\nFor more information, read https://github.com/mirego/hanzo#install-remotes", :red
@@ -36,7 +38,7 @@ module Hanzo
 
     def diff
       validate_environment_existence!
-      Hanzo.run "git remote update #{@env} && git diff #{@env}/master...HEAD"
+      Hanzo.run("git remote update #{@env} && git diff #{@env}/master...HEAD")
     end
 
     def validate_environment_existence!

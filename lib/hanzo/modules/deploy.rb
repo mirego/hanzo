@@ -1,6 +1,6 @@
 module Hanzo
   class Deploy < Base
-    # Classes
+    # Errors
     UnknownEnvironment = Class.new(StandardError)
     UninstalledEnvironment = Class.new(StandardError)
 
@@ -13,14 +13,16 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help && return if @env.nil?
+      return false if @env.nil?
 
-      deploy && run_after_deploy_commands
+      run_after_deploy_commands if deploy
+
+      true
     rescue UnknownEnvironment
-      Hanzo.unindent_print "Environment `#{@env}` doesn't exist. Add it to .hanzo.yml and run:\n  hanzo install remotes", :red
-      Hanzo.unindent_print "\nFor more information, read https://github.com/mirego/hanzo#remotes", :red
+      Hanzo.unindent_print("Environment `#{@env}` doesn't exist. Add it to .hanzo.yml and run:\n  hanzo install remotes", :red)
+      Hanzo.unindent_print("\nFor more information, read https://github.com/mirego/hanzo#remotes", :red)
     rescue UninstalledEnvironment
-      Hanzo.unindent_print "Environment `#{@env}` has been found in your .hanzo.yml file. Before using it, you must install it:\n  hanzo install remotes", :red
+      Hanzo.unindent_print("Environment `#{@env}` has been found in your .hanzo.yml file. Before using it, you must install it:\n  hanzo install remotes", :red)
     end
 
     def initialize_help
@@ -40,21 +42,27 @@ module Hanzo
 
       branch = @branch || Hanzo.ask("Branch to deploy in #{@env}:") { |q| q.default = 'HEAD' }
 
-      Hanzo.run "git push -f #{@env} #{branch}:master"
+      Hanzo.run("git push -f #{@env} #{branch}:master")
     end
 
     def run_after_deploy_commands
       return unless after_deploy_commands.any?
 
+      provider = Object.const_get("Hanzo::#{Hanzo.config['provider'].capitalize}")
       restart_needed = false
 
       after_deploy_commands.each do |command|
         next unless Hanzo.agree("Run `#{command}` on #{@env}?")
-        Hanzo.run "heroku run #{command} --remote #{@env}"
+
+        provider.run_command(@env, command)
+
         restart_needed = true
       end
 
-      Hanzo.run "heroku ps:restart --remote #{@env}" if restart_needed
+      return unless restart_needed
+
+      Hanzo.title('Restarting application')
+      provider.restart_app(@env)
     end
 
     def after_deploy_commands

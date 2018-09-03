@@ -1,15 +1,15 @@
 module Hanzo
-  module Heroku
+  module Dokku
     def self.run_command(env, command)
-      Hanzo.run("heroku run --remote #{env} #{command}")
+      Hanzo.run("ssh -t #{Hanzo.config['host']} run #{Hanzo.config['remotes'][env]} #{command}")
     end
 
     def self.restart_app(env)
-      Hanzo.run("heroku ps:restart --remote #{env}")
+      Hanzo.run("ssh -t #{Hanzo.config['host']} ps:restart #{Hanzo.config['remotes'][env]}")
     end
 
     def self.fetch_config(env)
-      config = Hanzo.run("heroku config --remote #{env}", true).split("\n")
+      config = Hanzo.run("ssh -t #{Hanzo.config['host']} config #{Hanzo.config['remotes'][env]}", true).split("\n")
 
       # Reject the first line
       config = config.reject { |line| line =~ /^=/ }

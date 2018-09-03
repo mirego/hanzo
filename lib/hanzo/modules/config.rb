@@ -15,9 +15,11 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help && return if @type != 'compare'
+      return false if @type != 'compare'
 
       compare
+
+      true
     end
 
     def initialize_help
@@ -33,27 +35,26 @@ module Hanzo
 
     def fetch_variables
       @variables = Hanzo::Installers::Remotes.environments.keys.reduce({}) do |memo, env|
-        # Fetch the variables over at Heroku
-        config = Hanzo.run("heroku config -r #{env}", true).split("\n")
-
-        # Reject the first line (Heroku header)
-        config = config.reject { |line| line =~ /^=/ }
-
-        # Only keep the variable name, not their value
-        config = config.map { |line| line.gsub(/^([^:]+):.*$/, '\1') }
-
-        memo.merge env => config
+        memo.merge(env => Object.const_get("Hanzo::#{Hanzo.config['provider'].capitalize}").fetch_config(env))
       end
     end
 
     def compare_variables
       all_variables = @variables.values.flatten.uniq
+      has_missing_variables = false
 
       @variables.each_pair do |env, variables|
         missing_variables = all_variables - variables
-        Hanzo.print "Missing variables in #{env}", :yellow
+
+        next if missing_variables.empty?
+
+        has_missing_variables = true
+
+        Hanzo.print("Missing variables in #{env}", :yellow)
         Hanzo.print(missing_variables.map { |v| "- #{v}" })
       end
+
+      Hanzo.print('No missing variables', :yellow)
     end
   end
 end
