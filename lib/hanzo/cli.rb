@@ -7,7 +7,7 @@ require 'hanzo/modules/console'
 module Hanzo
   class CLI < Base
     def run
-      @options.parse!(@args) if @opts.respond_to? :parse!
+      @options.parse!(@args) if @options.respond_to? :parse!
       puts @options unless @options.to_s == "Usage: hanzo [options]\n"
     end
 
@@ -18,7 +18,10 @@ module Hanzo
     end
 
     def initialize_cli
-      initialize_help && return if @app.nil?
+      @options.on('-v', '--version', 'Print version') do
+        puts "Hanzo #{Hanzo::VERSION}"
+        exit
+      end
 
       begin
         @options = Hanzo.const_get(@app.capitalize).new(@args).options
@@ -40,8 +43,7 @@ module Hanzo
 
         Options:
       BANNER
-      @options.on('-h', '--help', 'You\'re looking at it.') { puts @options }
-      @options.on('-v', '--version', 'Print version') { puts "Hanzo #{Hanzo::VERSION}" }
+      @options.on('-h', '--help', 'You\'re looking at it.')
     end
   end
 end
