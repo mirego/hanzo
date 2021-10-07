@@ -56,13 +56,13 @@ $ hanzo install remotes
 -----> Creating git remotes
        Adding qa
         git remote rm qa 2>&1 > /dev/null
-        git remote add qa git@heroku.com:heroku-app-name-qa.git
+        git remote add qa https://git.heroku.com/heroku-app-name-qa.git
        Adding staging
         git remote rm staging 2>&1 > /dev/null
-        git remote add staging git@heroku.com:heroku-app-name-staging.git
+        git remote add staging https://git.heroku.com/heroku-app-name-staging.git
        Adding production
         git remote rm production 2>&1 > /dev/null
-        git remote add production git@heroku.com:heroku-app-name-production.git
+        git remote add production https://git.heroku.com/heroku-app-name-production.git
 ```
 
 #### Labs
@@ -188,7 +188,7 @@ Running iex -S mix on heroku-app-name-qa... up
 ## License
 
 `Hanzo` is © 2013-2018 [Mirego](http://www.mirego.com) and may be freely
-distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the
+distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause). See the
 [`LICENSE.md`](https://github.com/mirego/hanzo/blob/master/LICENSE.md) file.
 
 ## About Mirego
