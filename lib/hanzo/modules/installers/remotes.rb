@@ -12,7 +12,7 @@ module Hanzo
       def self.add_remote(app, env)
         Hanzo.print "Adding #{env}"
         Hanzo.run "git remote rm #{env} 2>&1 > /dev/null"
-        Hanzo.run "git remote add #{env} git@heroku.com:#{app}.git"
+        Hanzo.run "git remote add #{env} https://git.heroku.com/#{app}.git"
       end
 
       def self.environments

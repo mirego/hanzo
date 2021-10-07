@@ -46,7 +46,7 @@ describe Hanzo::CLI do
           heroku_remotes.each do |env, app|
             expect(Hanzo).to receive(:print).with("Adding #{env}")
             expect(Hanzo).to receive(:run).with("git remote rm #{env} 2>&1 > /dev/null")
-            expect(Hanzo).to receive(:run).with("git remote add #{env} git@heroku.com:#{app}.git")
+            expect(Hanzo).to receive(:run).with("git remote add #{env} https://git.heroku.com/#{app}.git")
           end
         end
 
